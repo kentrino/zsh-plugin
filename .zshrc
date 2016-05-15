@@ -59,7 +59,7 @@ alias ga="git add"
 
 # docker 
 function docker-enable(){
-  eval $(docker-machine env test)
+  eval $(docker-machine env $1)
 }
 
 
