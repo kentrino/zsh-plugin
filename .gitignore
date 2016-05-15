@@ -1,0 +1,22 @@
+/*
+# vim
+!.vimrc
+!.dein_lazy.toml
+!.dein.toml
+
+# zsh
+!.zprezto
+!.zprezto/**/*
+
+!.zshrc
+!.zlogin
+!.zlogout
+!.zpreztorc
+!.zprofile
+!.zshenv
+
+# git config
+!.gitignore_global
+!.gitignore
+!.gitmodules
+

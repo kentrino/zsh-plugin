@@ -1,0 +1,48 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc'
+build = 'make'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo = 'sickill/vim-monokai'
+
+# Code Inspection
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'tpope/vim-pathogen'
+
+# Haskell syntax
+[[plugins]]
+repo = 'neovimhaskell/haskell-vim'
+
+# Quick Run
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+# Toml
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+# Auto paring brackets or 
+[[plugins]]
+#repo = 'jiangmiao/auto-pairs'
+repo = 'kana/vim-smartinput'
+
+# Slim syntax
+[[plugins]]
+repo = 'slim-template/vim-slim'
+
+# Nginx conf syntax
+[[plugins]]
+repo ='vim-scripts/nginx.vim'
+
