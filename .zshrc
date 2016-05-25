@@ -10,14 +10,20 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# automatical run ls after every cd ======================
+# Source peco utils =======================================================
+# for f (~/.peco/*) source "${f}"
+
+# Source z ================================================================
+source ~/z/z.sh
+
+# automatical run ls after every cd =======================================
 function list_all() {
     emulate -L zsh
     ls -la
 }
 chpwd_functions=(${chpwd_functions[@]} "list_all")
 
-# move to my directory ==================================
+# move to my directory ====================================================
 alias k="cd ~/../kento"
 
 # init path
@@ -62,4 +68,10 @@ function docker-enable(){
   eval $(docker-machine env $1)
 }
 
+function docker-clean(){
+  docker kill $(docker ps -q)
+  docker rm $(docker ps -a -q)
+  docker volume rm $(docker volume ls -q)
+  docker rmi --force $(docker images -q)
+}
 
