@@ -10,8 +10,46 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Source peco utils =======================================================
+# peco =====================================================================
 # for f (~/.peco/*) source "${f}"
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
+
+# pecoでgit add
+function peco-select-gitadd() {
+    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+                                  peco --query "$LBUFFER" | \
+                                  awk -F ' ' '{print $NF}')"
+    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
+        BUFFER="git add $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
+        CURSOR=$#BUFFER
+    fi
+    zle accept-line
+    # zle clear-screen
+}
+zle -N peco-select-gitadd
+bindkey "^g^a" peco-select-gitadd
+
+function peco-branch () {
+    local branch=$(git branch -a | peco | tr -d ' ' | tr -d '*')
+    if [ -n "$branch" ]; then
+      if [ -n "$LBUFFER" ]; then
+        local new_left="${LBUFFER%\ } $branch"
+      else
+        local new_left="$branch"
+      fi
+      BUFFER=${new_left}${RBUFFER}
+      CURSOR=${#new_left}
+    fi
+}
+zle -N peco-branch
+bindkey '^g^b' peco-branch # C-x b でブランチ選択
 
 # Source z ================================================================
 source ~/z/z.sh
@@ -65,13 +103,31 @@ alias ga="git add"
 
 # docker 
 function docker-enable(){
+  if [[ -n $1 ]]; then
+    eval $(docker-machine env default)
+  fi
   eval $(docker-machine env $1)
 }
 
 function docker-clean(){
-  docker kill $(docker ps -q)
-  docker rm $(docker ps -a -q)
-  docker volume rm $(docker volume ls -q)
-  docker rmi --force $(docker images -q)
+  if [[ $1 == 'container' ]]; then
+    docker rm $(docker ps -q -a)
+  elif [[ $1 == 'volume' ]]; then
+    docker volume rm $(docker volume ls -q)
+  else
+    echo 'clean all'
+    docker kill $(docker ps -q)
+    docker rm $(docker ps -a -q)
+    docker volume rm $(docker volume ls -q)
+#    docker rmi --force $(docker images -q)
+  fi
 }
+
+# objc2swift 
+alias objc2swift='java -jar /usr/local/objc2swift/build/libs/objc2swift-1.0.jar'
+
+# golang
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/go
 

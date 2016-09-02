@@ -46,3 +46,5 @@ repo = 'slim-template/vim-slim'
 [[plugins]]
 repo ='vim-scripts/nginx.vim'
 
+[[plugins]]
+repo = 'elixir-lang/vim-elixir'
