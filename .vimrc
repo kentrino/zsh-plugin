@@ -106,6 +106,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" javascript
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = '~/.nodebrew/current/bin/eslint'
+
 " Nginx syntax settings ====================================================
 au BufRead,BufNewFile /etc/nginx/* set ft=nginx
 au Bufread,BufNewFile */nginx*conf set ft=nginx

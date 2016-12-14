@@ -65,11 +65,13 @@ chpwd_functions=(${chpwd_functions[@]} "list_all")
 alias k="cd ~/../kento"
 
 # init path
-PATH=
 if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
 export PATH=/usr/local/bin:$PATH
+
+# node
+export PATH=./node_modules/.bin:$PATH
 
 # Customize to your needs...
 # nodebrew
@@ -131,3 +133,12 @@ export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/go
 
+# Visual Studio Code
+vs () {
+  VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
+}
+
+# py
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH="${PYENV_ROOT}/bin:$PATH"
+eval "$(pyenv init -)"
