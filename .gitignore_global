@@ -1,9 +1,10 @@
 *~
 .DS_Store
-.idea
+.idea/*
 .*.swp
 node_modules
 
 .gitattributes
 .envrc
+my_ruby_extension.rb
 

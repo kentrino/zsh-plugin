@@ -24,5 +24,5 @@
 !.gitmodules
 
 # z directory
-!z
+!.z_script
 

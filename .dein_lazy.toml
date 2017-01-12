@@ -71,9 +71,10 @@ on_path = '.*\.\(ex\|exs\|eex\)'
 repo = 'davidhalter/jedi-vim'
 on_ft = 'python'
 
-[[plugins]]
-repo = 'kevinw/pyflakes-vim'
-on_ft = 'python'
+# doesn't work
+#[[plugins]]
+#repo = 'kevinw/pyflakes-vim'
+#on_ft = 'python'
 
 #[[plugins]]
 #repo = 'leafgarland/typescript-vim'

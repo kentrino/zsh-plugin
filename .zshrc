@@ -52,7 +52,7 @@ zle -N peco-branch
 bindkey '^g^b' peco-branch # C-x b でブランチ選択
 
 # Source z ================================================================
-source ~/z/z.sh
+source ~/.z_script/z.sh
 
 # automatical run ls after every cd =======================================
 function list_all() {
@@ -86,7 +86,9 @@ export EDITOR=vim
 
 
 # rbenv
-eval "$(rbenv init -)"
+rbenv-init() {
+  eval "$(rbenv init -)"
+}
 export PATH="$HOME/.rbenv/shims:$PATH"
 
 # Haskell
@@ -141,4 +143,26 @@ vs () {
 # py
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
-eval "$(pyenv init -)"
+
+pyenv-init() {
+  eval "$(pyenv init -)"
+}
+
+# set default editor.
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+
+# rails aliases
+alias rc="bundle exec rails console"
+alias rs="bundle exec foreman start"
+alias ru="FAIL_FAST=true bundle exec rake test:units"
+
+rt () {
+  if [ -z "$2" ]; then
+    FAIL_FAST=true bundle exec rake test TEST=$1
+  else
+    FAIL_FAST=true bundle exec rake test TEST=$1 TESTOPTS="--name=$2"
+  fi
+}
+
