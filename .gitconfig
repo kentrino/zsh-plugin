@@ -1,0 +1,21 @@
+[core]
+	excludesfile = /Users/kento/.gitignore_global
+
+[user]
+  name = kentrino
+  email = kentrino@h-kento.jp
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[credential]
+  helper = cache --timeout=8640000
+
+[push]
+  default = simple
+

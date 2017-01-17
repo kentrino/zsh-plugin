@@ -22,6 +22,7 @@
 !.gitignore_global
 !.gitignore
 !.gitmodules
+!.gitconfig
 
 # z directory
 !.z_script
