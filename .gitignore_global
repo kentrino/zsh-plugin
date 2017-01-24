@@ -8,3 +8,5 @@ node_modules
 .envrc
 my_ruby_extension.rb
 
+npm-debug.log
+

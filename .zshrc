@@ -57,10 +57,10 @@ function list_all() {
 chpwd_functions=(${chpwd_functions[@]} "list_all")
 
 # Node.js ====================================================================
-export PATH=./node_modules/.bin:$PATH
-
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+export PATH=./node_modules/.bin:$PATH
 
 # direnv =====================================================================
 eval "$(direnv hook zsh)"
