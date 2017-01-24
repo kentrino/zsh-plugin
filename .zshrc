@@ -56,9 +56,13 @@ function list_all() {
 }
 chpwd_functions=(${chpwd_functions[@]} "list_all")
 
+# anyenv =====================================================================
+export PATH=$HOME/.anyenv/bin:$PATH
+eval "$(anyenv init -)"
+
 # Node.js ====================================================================
 # nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+#export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 export PATH=./node_modules/.bin:$PATH
 
@@ -66,10 +70,10 @@ export PATH=./node_modules/.bin:$PATH
 eval "$(direnv hook zsh)"
 
 # rbenv ======================================================================
-rbenv-init() {
-  eval "$(rbenv init -)"
-}
-export PATH="$HOME/.rbenv/shims:$PATH"
+#rbenv-init() {
+#  eval "$(rbenv init -)"
+#}
+#export PATH="$HOME/.rbenv/shims:$PATH"
 
 # Haskell ====================================================================
 alias ghc="stack ghc"
@@ -110,12 +114,12 @@ vs () {
 }
 
 # Python =====================================================================
-export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:$PATH"
+#export PYENV_ROOT="${HOME}/.pyenv"
+#export PATH="${PYENV_ROOT}/bin:$PATH"
 
-pyenv-init() {
-  eval "$(pyenv init -)"
-}
+# pyenv-init() {
+#  eval "$(pyenv init -)"
+#}
 
 # Default editor =============================================================
 export VISUAL=vim
