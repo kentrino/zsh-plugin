@@ -27,3 +27,6 @@
 # z directory
 !.z_script
 
+!.vim
+# supress last login output
+!.hushlogin
