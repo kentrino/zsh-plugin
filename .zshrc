@@ -3,6 +3,13 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# anyenv =====================================================================
+if type anyenv > /dev/null 2>&1; then
+  export PATH=$HOME/.anyenv/bin:$PATH
+  eval "$(anyenv init -)"
+  export USE_ANYENV=true
+fi
+
 # peco =======================================================================
 # for f (~/.peco/*) source "${f}"
 function peco-history-selection() {
@@ -57,9 +64,11 @@ function list_all() {
 chpwd_functions=(${chpwd_functions[@]} "list_all")
 
 # python =====================================================================
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
+if type pyenv > /dev/null 2>&1 && ! $USE_ANYENV; then 
+  export PYENV_ROOT=$HOME/.pyenv
+  export PATH=$PYENV_ROOT/bin:$PATH
+  eval "$(pyenv init -)"
+fi
 
 # conda
 activate () {
@@ -71,13 +80,17 @@ deactivate () {
 }
 
 # direnv =====================================================================
-# eval "$(direnv hook zsh)"
+if type direnv > /dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
 
 # rbenv ======================================================================
-#rbenv-init() {
-#  eval "$(rbenv init -)"
-#}
-#export PATH="$HOME/.rbenv/shims:$PATH"
+if type rbenv > /dev/null 2>&1 && ! $USE_ANYENV; then 
+  rbenv-init() {
+    eval "$(rbenv init -)"
+  }
+  export PATH="$HOME/.rbenv/shims:$PATH"
+fi
 
 # Git ========================================================================
 alias gcm="git commit -m"
