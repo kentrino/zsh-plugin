@@ -18,6 +18,7 @@
 !.zprofile
 !.zshenv
 !.zshenv_prezto
+!.z_add
 
 # git config
 !.gitignore_global
