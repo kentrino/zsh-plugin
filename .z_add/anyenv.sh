@@ -1,5 +1,11 @@
-export PATH=$HOME/.anyenv/bin:$PATH
-if type anyenv > /dev/null 2>&1; then
-  eval "$(anyenv init -)"
+if [ -e "$HOME/.anyenv" ]; then
+  export PATH=$HOME/.anyenv/bin:$PATH
+  if $ANYENV_EAGER_INIT; then
+    eval "$(anyenv init -)"
+  else
+    function anyenv-init () {
+      eval "$(anyenv init -)"
+    }
+  fi
   export USE_ANYENV=true
 fi
