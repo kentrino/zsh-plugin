@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/kento/.gitignore_global
+	excludesfile = ~/.gitignore_global
 
 [user]
   name = kentrino

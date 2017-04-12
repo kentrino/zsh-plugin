@@ -1,6 +1,7 @@
-export PYENV_ROOT=$HOME/.pyenv
-if [ -e $PYENV_ROOT ] && ! $USE_ANYENV; then
-  export PATH=$PYENV_ROOT/bin:$PATH
+#
+if [ -e "$HOME/.pyenv" ] && ! $USE_ANYENV; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
   if [ "$PYENV_EAGER_INIT" = 'true' ]; then
     eval "$(pyenv init -)"
   else
