@@ -13,10 +13,17 @@ function z_add () {
 
 z_add 'test'
 
+# anyenv =====================================================================
+if type anyenv > /dev/null 2>&1; then
+  export PATH=$HOME/.anyenv/bin:$PATH
+  eval "$(anyenv init -)"
+  export USE_ANYENV=true
+fi
+
 # peco =======================================================================
 # for f (~/.peco/*) source "${f}"
 function peco-history-selection() {
-    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
     CURSOR=$#BUFFER
     zle reset-prompt
 }
@@ -66,30 +73,34 @@ function list_all() {
 }
 chpwd_functions=(${chpwd_functions[@]} "list_all")
 
-# anyenv =====================================================================
-export PATH=$HOME/.anyenv/bin:$PATH
-eval "$(anyenv init -)"
+# python =====================================================================
+if type pyenv > /dev/null 2>&1 && ! $USE_ANYENV; then 
+  export PYENV_ROOT=$HOME/.pyenv
+  export PATH=$PYENV_ROOT/bin:$PATH
+  eval "$(pyenv init -)"
+fi
 
-# Node.js ====================================================================
-# nodebrew
-#export PATH=$HOME/.nodebrew/current/bin:$PATH
+# conda
+activate () {
+  source $HOME/.pyenv/versions/`pyenv global`/bin/activate $1
+}
 
-export PATH=./node_modules/.bin:$PATH
+deactivate () {
+  source $HOME/.pyenv/versions/`pyenv global`/bin/deactivate
+}
 
 # direnv =====================================================================
-eval "$(direnv hook zsh)"
+if type direnv > /dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
 
 # rbenv ======================================================================
-#rbenv-init() {
-#  eval "$(rbenv init -)"
-#}
-#export PATH="$HOME/.rbenv/shims:$PATH"
-
-# Haskell ====================================================================
-alias ghc="stack ghc"
-alias ghci="stack ghci"
-alias runghc="stack runghc"
-export PATH=$PATH:$HOME/.local/bin
+if type rbenv > /dev/null 2>&1 && ! $USE_ANYENV; then 
+  rbenv-init() {
+    eval "$(rbenv init -)"
+  }
+  export PATH="$HOME/.rbenv/shims:$PATH"
+fi
 
 # Git ========================================================================
 alias gcm="git commit -m"
@@ -99,39 +110,12 @@ alias gca="git commit --amend"
 alias gcob="git checkout -b"
 alias ga="git add"
 
-# Docker =====================================================================
-function docker-clean(){
-  if [[ $1 == 'container' ]]; then
-    docker rm $(docker ps -q -a)
-  elif [[ $1 == 'volume' ]]; then
-    docker volume rm $(docker volume ls -q)
-  elif [[ $1 == 'all' ]]; then
-    docker kill $(docker ps -q)
-    docker rm $(docker ps -a -q)
-    docker volume rm $(docker volume ls -q)
-    docker rmi --force $(docker images -q)
-  fi
-}
-
 # Go =========================================================================
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/go
 
-# Visual Studio Code =========================================================
-vs () {
-  VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
-}
-
-# Python =====================================================================
-#export PYENV_ROOT="${HOME}/.pyenv"
-#export PATH="${PYENV_ROOT}/bin:$PATH"
-
-# pyenv-init() {
-#  eval "$(pyenv init -)"
-#}
-
-# Default editor =============================================================
+# Default Editor =============================================================
 export VISUAL=vim
 export EDITOR="$VISUAL"
 

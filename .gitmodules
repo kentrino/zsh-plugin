@@ -1,6 +1,6 @@
 [submodule ".zprezto"]
 	path = .zprezto
-  url = https://github.com/kentrino/prezto.git
+  url = git@github.com:kentrino/prezto.git
 
 [submodule ".z"]
   path = .z_script
