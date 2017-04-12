@@ -1,6 +1,8 @@
+export USE_ANYENV=false
+
 if [ -e "$HOME/.anyenv" ]; then
   export PATH=$HOME/.anyenv/bin:$PATH
-  if $ANYENV_EAGER_INIT; then
+  if [ "$ANYENV_EAGER_INIT" = 'true' ]; then
     eval "$(anyenv init -)"
   else
     function anyenv-init () {
