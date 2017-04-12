@@ -3,6 +3,16 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+function z_add () {
+  lib=${1:?"You have to specify a library name"}
+  lib_path="$HOME/.z_add/$lib.sh"
+  if [ -f "$lib_path" ];then
+    source "$lib_path"
+  fi
+}
+
+z_add 'test'
+
 # peco =======================================================================
 # for f (~/.peco/*) source "${f}"
 function peco-history-selection() {
