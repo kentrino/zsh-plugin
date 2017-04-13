@@ -1,7 +1,14 @@
-if type pyenv > /dev/null 2>&1 && ! $USE_ANYENV; then 
-  export PYENV_ROOT=$HOME/.pyenv
-  export PATH=$PYENV_ROOT/bin:$PATH
-  eval "$(pyenv init -)"
+#
+if [ -e "$HOME/.pyenv" ] && ! $USE_ANYENV; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  if [ "$PYENV_EAGER_INIT" = 'true' ]; then
+    eval "$(pyenv init -)"
+  else
+    function pyenv-init () {
+      eval "$(pyenv init -)"
+    }
+  fi
 fi
 
 if type pyenv > /dev/null 2>&1; then

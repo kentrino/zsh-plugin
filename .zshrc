@@ -3,6 +3,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+source ~/.zshrc_vars
+
 function z_add () {
   lib=${1:?"You have to specify a library name"}
   lib_path="$HOME/.z_add/$lib.sh"
