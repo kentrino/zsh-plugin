@@ -26,3 +26,5 @@ z_add 'editor'
 z_add 'cd_ls'
 z_add 'haskell'
 z_add 'node'
+z_add 'terraform'
+
