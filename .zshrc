@@ -30,4 +30,4 @@ z_add 'haskell'
 z_add 'node'
 z_add 'terraform'
 z_add 'rust'
-
+z_add 'java'
