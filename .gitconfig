@@ -2,8 +2,9 @@
 	excludesfile = ~/.gitignore_global
 
 [user]
-  name = kentrino
-  email = kentrino@h-kento.jp
+	name = kentrino
+	email = tachikoma@h-kento.jp
+	signingkey = B9E82B043D90192AB9A2B7A617AECDC1BD7460A2
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -19,3 +20,14 @@
 [push]
   default = simple
 
+# [commit]
+#  gpgsign = true
+
+# [gpg]
+#  program = gpg
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

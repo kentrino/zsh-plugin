@@ -3,7 +3,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-source ~/.zshrc_vars
+if [ -e ~/.zshrc_vars ]; then
+  source ~/.zshrc_vars
+fi
 
 function z_add () {
   lib=${1:?"You have to specify a library name"}
@@ -26,3 +28,7 @@ z_add 'editor'
 z_add 'cd_ls'
 z_add 'haskell'
 z_add 'bazel'
+z_add 'node'
+z_add 'terraform'
+z_add 'rust'
+z_add 'java'

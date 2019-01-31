@@ -4,9 +4,11 @@ if [ -e "$HOME/.pyenv" ] && ! $USE_ANYENV; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   if [ "$PYENV_EAGER_INIT" = 'true' ]; then
     eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
   else
     function pyenv-init () {
       eval "$(pyenv init -)"
+      eval "$(pyenv virtualenv-init -)"
     }
   fi
 fi
