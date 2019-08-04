@@ -3,8 +3,8 @@
 
 [user]
 	name = kentrino
-	email = tachikoma@h-kento.jp
-	signingkey = B9E82B043D90192AB9A2B7A617AECDC1BD7460A2
+	email = kentrino@h-kento.jp
+	signingKey = A3A60735004D91924639BE45275556AD18955D2E
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -18,10 +18,10 @@
   helper = cache --timeout=8640000
 
 [push]
-  default = simple
+  default = current
 
 [commit]
-  gpgsign = true
+  gpgSign = true
 
 [gpg]
   program = gpg
