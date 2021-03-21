@@ -1,5 +1,8 @@
 export LANG=en_US.UTF-8
 
+pwd
+echo $0:A
+
 source 'src/anyenv.sh'
 source 'src/bazel.sh'
 source 'src/cd_ls.sh'
