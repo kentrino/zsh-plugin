@@ -1,6 +1,10 @@
 function ls_all() {
     emulate -L zsh
-    ls -la
+    if type "exa" > /dev/null 2>&1; then
+      exa --header --group --long --all
+    else
+      ls -la
+    fi
 }
 
 chpwd_functions=(${chpwd_functions[@]} "ls_all")
