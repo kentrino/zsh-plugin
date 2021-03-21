@@ -13,3 +13,6 @@ if [ ! -e "$HOME/.zsh/completion/_docker-compose" ]; then
     -L "https://raw.githubusercontent.com/docker/compose/master/contrib/completion/zsh/_docker-compose" \
     -o "$HOME/.zsh/completion/_docker-compose"
 fi
+
+# Docker command completion settings
+fpath=(~/.zsh/completion $fpath)
