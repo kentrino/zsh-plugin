@@ -1,8 +1,0 @@
-[submodule ".zprezto"]
-	path = .zprezto
-  url = https://github.com/kentrino/prezto.git
-
-[submodule ".z"]
-  path = .z_script
-  url = https://github.com/rupa/z.git
-

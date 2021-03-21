@@ -1,9 +1,9 @@
 # for f (~/.peco/*) source "${f}"
 function peco-history-selection() {
     if $MAC_OS; then
-      BUFFER=`history -n 1 | tail -r | awk '!a[$0]++' | peco`
+      BUFFER=$(history -n 1 | tail -r | awk '!a[$0]++' | peco)
     else
-      BUFFER=`history -n 1 | tac | awk '!a[$0]++' | peco`
+      BUFFER=$(history -n 1 | tac | awk '!a[$0]++' | peco)
     fi
     CURSOR=$#BUFFER
     zle reset-prompt
