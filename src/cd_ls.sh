@@ -1,6 +1,6 @@
-function list_all() {
+function ls_all() {
     emulate -L zsh
     ls -la
 }
 
-chpwd_functions=(${chpwd_functions[@]} "list_all")
+chpwd_functions=(${chpwd_functions[@]} "ls_all")
