@@ -15,4 +15,4 @@ if [ ! -e "$HOME/.zsh/completion/_docker-compose" ]; then
 fi
 
 # Docker command completion settings
-fpath=(~/.zsh/completion $fpath)
+fpath=(~/.zsh/completion "$fpath")
