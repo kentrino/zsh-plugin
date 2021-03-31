@@ -2,7 +2,9 @@ function get-computer-name () {
   scutil --get ComputerName
 }
 
-export __pwd=$(which pwd)
+# zsh have built-in pwd,
+# so `which pwd` returns `pwd: shell built-in command`
+export __pwd=$(whereis pwd)
 
 function pwd() {
   $__pwd | pbcopy
