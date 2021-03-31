@@ -7,5 +7,7 @@ function get-computer-name () {
 export __pwd=$(whereis pwd)
 
 function pwd() {
-  $__pwd | pbcopy
+  working_dir=$("$__pwd")
+  echo $working_dir | pbcopy
+  echo $working_dir
 }
