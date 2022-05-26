@@ -1,16 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-# shellcheck disable=SC3033
 initialize-python-environment() {
-  export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
+    export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
 
-  if command -v pyenv 1>/dev/null 2>&1; then
-      eval "$(pyenv init -)"
-  fi
+    if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+    fi
 
-  export PATH="$HOME/.poetry/bin:$PATH"
+    export PATH="$HOME/.poetry/bin:$PATH"
 }
-
-initialize-python-environment &

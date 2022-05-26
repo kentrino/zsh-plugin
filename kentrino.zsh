@@ -1,6 +1,9 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
 export LANG=en_US.UTF-8
 
-DIRECTORY=$(dirname $0:A)
+DIRECTORY=$(dirname "$0":A)
 
 source "$DIRECTORY/src/anyenv.sh"
 source "$DIRECTORY/src/bazel.sh"
@@ -24,3 +27,13 @@ source "$DIRECTORY/src/rust.sh"
 source "$DIRECTORY/src/sdkman.sh"
 source "$DIRECTORY/src/uuidgen.sh"
 source "$DIRECTORY/src/z.sh"
+
+initialize() {
+    initialize-anyenv-environment
+    initialize-go-environment
+    initialize-phpenv-environment
+    initialize-python-environment
+    initialize-sdkman-environment
+}
+
+initialize &

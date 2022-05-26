@@ -1,9 +1,10 @@
-# for f (~/.peco/*) source "${f}"
-function peco-history-selection() {
+#!/bin/bash
+
+peco-history-selection() {
     if $MAC_OS; then
-      BUFFER=$(history -n 1 | tail -r | awk '!a[$0]++' | peco)
+        BUFFER=$(history -n 1 | tail -r | awk '!a[$0]++' | peco)
     else
-      BUFFER=$(history -n 1 | tac | awk '!a[$0]++' | peco)
+        BUFFER=$(history -n 1 | tac | awk '!a[$0]++' | peco)
     fi
     CURSOR=$#BUFFER
     zle reset-prompt
@@ -12,11 +13,11 @@ function peco-history-selection() {
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
-# git add with peco
-function peco-select-gitadd() {
-    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
-                                  peco --query "$LBUFFER" | \
-                                  awk -F ' ' '{print $NF}')"
+peco-select-git-add() {
+    local SELECTED_FILE_TO_ADD
+    SELECTED_FILE_TO_ADD="$(git status --porcelain |
+        peco --query "$LBUFFER" |
+        awk -F ' ' '{print $NF}')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
         BUFFER="git add $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
         CURSOR=$#BUFFER
@@ -24,19 +25,23 @@ function peco-select-gitadd() {
     zle accept-line
     # zle clear-screen
 }
-zle -N peco-select-gitadd
-bindkey "^g^a" peco-select-gitadd
+zle -N peco-select-git-add
+bindkey "^g^a" peco-select-git-add
 
-function peco-branch () {
-    local branch=$(git branch -a | peco | tr -d ' ' | tr -d '*')
+peco-branch() {
+    local branch
+    # shellcheck disable=SC2063
+    branch=$(git branch -a | peco | tr -d ' ' | tr -d '*')
     if [ -n "$branch" ]; then
-      if [ -n "$LBUFFER" ]; then
-        local new_left="${LBUFFER%\ } $branch"
-      else
-        local new_left="$branch"
-      fi
-      BUFFER=${new_left}${RBUFFER}
-      CURSOR=${#new_left}
+        if [ -n "$LBUFFER" ]; then
+            local new_left="${LBUFFER%\ } $branch"
+        else
+            local new_left="$branch"
+        fi
+        # shellcheck disable=SC2034,SC2153
+        BUFFER=${new_left}${RBUFFER}
+        # shellcheck disable=SC2034
+        CURSOR=${#new_left}
     fi
 }
 

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias gcm="git commit -m"
 alias gs="git status"
 alias g="git"
@@ -7,8 +9,10 @@ alias gcob="git checkout -b"
 alias ga="git add"
 alias gcp="git cherry-pick"
 
-function git-branch-clean () {
-  git branch --merged | grep -v \* | xargs git branch -D
+function git-branch-clean() {
+    # shellcheck disable=SC2063
+    git branch --merged | grep -v \* | xargs git branch -D
 }
 
-export GPG_TTY=$(tty)
+GPG_TTY=$(tty)
+export GPG_TTY

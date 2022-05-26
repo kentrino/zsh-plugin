@@ -1,6 +1,7 @@
-uuidgen () {
-  # shellcheck disable=SC2018
-  text=$(/usr/bin/uuidgen | tr A-Z a-z)
-  echo "$text" | pbcopy
-  echo "$text"
+#!/bin/bash
+
+uuidgen() {
+    text=$(/usr/bin/uuidgen | tr '[:uppper:]' '[:lower:]')
+    echo "$text" | pbcopy
+    echo "$text"
 }
