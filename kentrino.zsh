@@ -26,6 +26,7 @@ source "$DIRECTORY/src/php.sh"
 source "$DIRECTORY/src/python.sh"
 source "$DIRECTORY/src/rust.sh"
 source "$DIRECTORY/src/sdkman.sh"
+source "$DIRECTORY/src/util.sh"
 source "$DIRECTORY/src/uuidgen.sh"
 source "$DIRECTORY/src/z.sh"
 
