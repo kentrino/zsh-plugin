@@ -6,6 +6,7 @@ export LANG=en_US.UTF-8
 DIRECTORY=$(dirname "$0":A)
 
 source "$DIRECTORY/src/anyenv.sh"
+source "$DIRECTORY/src/asdf.sh"
 source "$DIRECTORY/src/bazel.sh"
 source "$DIRECTORY/src/cd_ls.sh"
 source "$DIRECTORY/src/code.sh"
@@ -29,11 +30,17 @@ source "$DIRECTORY/src/uuidgen.sh"
 source "$DIRECTORY/src/z.sh"
 
 initialize() {
+    enable-asdf
     initialize-anyenv-environment
     initialize-go-environment
     initialize-phpenv-environment
     initialize-python-environment
     initialize-sdkman-environment
+    # To avoid error around 'Visutal Studio Code'
+    env | sed -r 's/(.+)=(.+)/\1="\2"/' | grep -v 'PWD=' | grep -v 'GPG_TTY' >/tmp/startup-env
 }
 
-initialize &
+(initialize &) >>/dev/null 2>&1
+wait
+source /tmp/startup-env
+rm -rf /tmp/startup-env
