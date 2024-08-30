@@ -1,5 +1,17 @@
 #!/bin/bash
 
+function select-tmux-session() {
+    if [ -n "$TMUX" ]; then
+        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
+        tmux switch-client -t $SELECTED
+        return 0
+    else
+        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
+        tmux attach-session -t $SELECTED
+        return 0
+    fi
+}
+
 # Resources
 # How to check if a variable is set in Bash
 # https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
@@ -74,15 +86,3 @@
 #         fi
 #     fi
 # }
-
-function select-tmux-session() {
-    if [ -n "$TMUX" ]; then
-        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
-        tmux switch-client -t $SELECTED
-        return 0
-    else
-        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
-        tmux attach-session -t $SELECTED
-        return 0
-    fi
-}
