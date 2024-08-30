@@ -2,8 +2,8 @@
 
 ls-all() {
     emulate -L zsh
-    if type "exa" >/dev/null 2>&1; then
-        exa --header --group --long --all
+    if type "eza" >/dev/null 2>&1; then
+        eza --header --group --long --all
     else
         ls -la
     fi

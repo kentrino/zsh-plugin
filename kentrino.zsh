@@ -8,7 +8,7 @@ DIRECTORY=$(dirname "$0":A)
 source "$DIRECTORY/src/anyenv.sh"
 source "$DIRECTORY/src/asdf.sh"
 source "$DIRECTORY/src/bazel.sh"
-source "$DIRECTORY/src/cd_ls.sh"
+source "$DIRECTORY/src/cd-ls.sh"
 source "$DIRECTORY/src/code.sh"
 source "$DIRECTORY/src/direnv.sh"
 source "$DIRECTORY/src/editor.sh"
