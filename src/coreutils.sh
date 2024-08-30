@@ -75,7 +75,7 @@ if brew --prefix coreutils >/dev/null 2>&1; then
     alias sum=gsum
     alias sync=gsync
     alias tac=gtac
-    alias tail=gtail
+    # alias tail=gtail
     alias tee=gtee
     alias test=gtest
     alias touch=gtouch
