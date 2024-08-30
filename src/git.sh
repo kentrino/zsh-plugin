@@ -13,6 +13,3 @@ function git-branch-clean() {
     # shellcheck disable=SC2063
     git branch --merged | grep -v \* | xargs git branch -D
 }
-
-GPG_TTY=$(tty)
-export GPG_TTY

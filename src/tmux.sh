@@ -8,7 +8,19 @@
 # -e: exit the script on error
 set -eu
 
-function t() {
+
+# Explain how this function works.
+#
+# 1. Read command file from ~/.tmux.yml
+# 2. Get all sessions from tmux
+# 3. Get all keys from yml file
+# 4. Colorize lines by result of `grep -o`
+# 5. Add detach keyword if tmux is running
+# 6. Select session name with fzf
+# 7. If selected is detach, detach tmux
+# 8. If selected is existed, switch session
+# 9. If selected is not existed, create new session
+function select-predefined-tmux-session() {
     local green='\033[0;32m'
     local red='\033[0;31m'
     local nc='\033[0m'
@@ -72,5 +84,17 @@ function t() {
             # if session is not started
             tmux new -s "$selected" -c "$current_directory" "$command"
         fi
+    fi
+}
+
+function select-tmux-session() {
+    if [ -n "$TMUX" ]; then
+        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
+        tmux switch-client -t $SELECTED
+        return 0
+    else
+        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
+        tmux attach-session -t $SELECTED
+        return 0
     fi
 }
