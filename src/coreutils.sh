@@ -37,7 +37,7 @@ if brew --prefix coreutils >/dev/null 2>&1; then
     alias link=glink
     alias ln=gln
     alias logname=glogname
-    alias ls='gls -F'
+    # alias ls='gls -F'
     alias md5sum=gmd5sum
     alias mkdir=gmkdir
     alias mkfifo=gmkfifo
