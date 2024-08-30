@@ -30,18 +30,18 @@ source "$DIRECTORY/src/util.sh"
 source "$DIRECTORY/src/uuidgen.sh"
 source "$DIRECTORY/src/z.sh"
 
-initialize() {
-    enable-asdf
-    initialize-anyenv-environment
-    initialize-go-environment
-    initialize-phpenv-environment
-    initialize-python-environment
-    initialize-sdkman-environment
-    # To avoid error around 'Visutal Studio Code'
-    env | sed -r 's/(.+)=(.+)/\1="\2"/' | grep -v 'PWD=' | grep -v 'GPG_TTY' >/tmp/startup-env
-}
+# initialize() {
+#     enable-asdf
+#     initialize-anyenv-environment
+#     initialize-go-environment
+#     initialize-phpenv-environment
+#     initialize-python-environment
+#     initialize-sdkman-environment
+#     # To avoid error around 'Visutal Studio Code'
+#     env | sed -r 's/(.+)=(.+)/\1="\2"/' | grep -v 'PWD=' | grep -v 'GPG_TTY' >/tmp/startup-env
+# }
 
-(initialize &) >>/dev/null 2>&1
-wait
-source /tmp/startup-env
-rm -rf /tmp/startup-env
+# (initialize &) >>/dev/null 2>&1
+# wait
+# source /tmp/startup-env
+# rm -rf /tmp/startup-env
