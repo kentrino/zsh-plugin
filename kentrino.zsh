@@ -5,6 +5,8 @@ export LANG=en_US.UTF-8
 
 DIRECTORY=$(dirname "$0":A)
 
+source "$DIRECTORY/src/coreutils.sh"
+
 source "$DIRECTORY/src/anyenv.sh"
 source "$DIRECTORY/src/asdf.sh"
 source "$DIRECTORY/src/bazel.sh"
@@ -12,7 +14,6 @@ source "$DIRECTORY/src/bindkey.sh"
 source "$DIRECTORY/src/cd-ls.sh"
 # source "$DIRECTORY/src/change-current-directory.sh"
 source "$DIRECTORY/src/code.sh"
-source "$DIRECTORY/src/coreutils.sh"
 source "$DIRECTORY/src/direnv.sh"
 source "$DIRECTORY/src/docker.sh"
 source "$DIRECTORY/src/editor.sh"
@@ -30,7 +31,7 @@ source "$DIRECTORY/src/peco.sh"
 source "$DIRECTORY/src/pg.sh"
 source "$DIRECTORY/src/php.sh"
 source "$DIRECTORY/src/python.sh"
-source "$DIRECTORY/src/rigrep.sh"
+source "$DIRECTORY/src/ripgrep.sh"
 source "$DIRECTORY/src/rust.sh"
 source "$DIRECTORY/src/util.sh"
 source "$DIRECTORY/src/uuidgen.sh"
