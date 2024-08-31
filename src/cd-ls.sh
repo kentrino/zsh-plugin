@@ -9,4 +9,10 @@ ls-all() {
     fi
 }
 
-chpwd_functions=("${chpwd_functions[@]}" "ls-all")
+# chpwd_functions break oh-my-zsh plugins
+# chpwd_functions=("${chpwd_functions[@]}" "ls-all")
+
+cd() {
+    builtin cd "$@"
+    ls-all
+}
