@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ls-all() {
-    emulate -L zsh
+    # emulate -L zsh
     if type "eza" >/dev/null 2>&1; then
         eza --header --group --long --all
     else
