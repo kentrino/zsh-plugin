@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if brew --prefix coreutils >/dev/null 2>&1; then
     alias base64=gbase64
     alias basename=gbasename
@@ -8,7 +10,7 @@ if brew --prefix coreutils >/dev/null 2>&1; then
     alias chroot=gchroot
     alias cksum=gcksum
     alias comm=gcomm
-    alias cp=gcp
+    # alias cp=gcp
     alias csplit=gcsplit
     alias cut=gcut
     alias date=gdate
