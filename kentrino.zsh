@@ -39,3 +39,5 @@ source "$DIRECTORY/src/z.sh"
 
 # initialize completions with ZSH's compinit
 autoload -Uz compinit && compinit
+
+PATH="$HOME/.local/bin:$PATH"
