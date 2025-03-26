@@ -1,2 +1,4 @@
 #!/bin/bash
-export PATH="$PATH:$HOME/.jetbrains-toolbox"
+if [ -d "$HOME/.jetbrains-toolbox" ]; then
+    export PATH="$PATH:$HOME/.jetbrains-toolbox"
+fi

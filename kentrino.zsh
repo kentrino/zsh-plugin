@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
 export LANG=en_US.UTF-8
 
 DIRECTORY=$(dirname "$0":A)
+
+source "$DIRECTORY/src/homebrew.sh"
 
 source "$DIRECTORY/src/coreutils.sh"
 
@@ -11,9 +12,7 @@ source "$DIRECTORY/src/anyenv.sh"
 source "$DIRECTORY/src/asdf.sh"
 source "$DIRECTORY/src/bazel.sh"
 source "$DIRECTORY/src/bindkey.sh"
-source "$DIRECTORY/src/cd-ls.sh"
-# source "$DIRECTORY/src/change-current-directory.sh"
-source "$DIRECTORY/src/code.sh"
+source "$DIRECTORY/src/cd.sh"
 source "$DIRECTORY/src/direnv.sh"
 source "$DIRECTORY/src/docker.sh"
 source "$DIRECTORY/src/editor.sh"
@@ -37,3 +36,6 @@ source "$DIRECTORY/src/tmux.sh"
 source "$DIRECTORY/src/util.sh"
 source "$DIRECTORY/src/uuidgen.sh"
 source "$DIRECTORY/src/z.sh"
+
+# initialize completions with ZSH's compinit
+autoload -Uz compinit && compinit

@@ -1,13 +1,14 @@
 #!/bin/bash
 
 function select-tmux-session() {
+    local SELECTED
     if [ -n "$TMUX" ]; then
-        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
-        tmux switch-client -t $SELECTED
+        SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
+        tmux switch-client -t "$SELECTED"
         return 0
     else
-        local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
-        tmux attach-session -t $SELECTED
+        SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
+        tmux attach-session -t "$SELECTED"
         return 0
     fi
 }

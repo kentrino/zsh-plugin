@@ -1,15 +1,17 @@
-function dev() {
-    target=$(fd . /Users/dev --max-depth 2 --type d --changed-within=10w | sed 's/\/Users\/dev\///' | fzf --ansi --no-sort )
-    cd /Users/dev/$target
+#!/bin/bash
+
+dev() {
+    target=$(fd . /Users/dev --max-depth 2 --type d --changed-within=10w | sed 's/\/Users\/dev\///' | fzf --ansi --no-sort)
+    cd "/Users/dev/$target" || exit
 }
 
-function ..() {
+..() {
     cd ..
 }
 
-function start() {
+start() {
     comment=$1
-    if [[ ! -z "${comment}" ]]; then
+    if [[ -n "${comment}" ]]; then
         git add .
         git commit -m "$comment"
     else
