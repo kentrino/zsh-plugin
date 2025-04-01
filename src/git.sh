@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias gcm="git commit -m"
+# alias gcm="git commit -m"
 alias gs="git status"
 alias g="git"
 alias gca="git commit --amend"
