@@ -14,7 +14,7 @@ ls-all() {
 
 cd() {
     # exit if cd fails
-    builtin cd "$@" || exit
+    builtin cd "$@"
     ls-all
 }
 
