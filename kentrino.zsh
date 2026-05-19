@@ -37,7 +37,7 @@ source "$DIRECTORY/src/rust.sh"
 source "$DIRECTORY/src/tmux.sh"
 source "$DIRECTORY/src/util.sh"
 source "$DIRECTORY/src/uuidgen.sh"
-source "$DIRECTORY/src/z.sh"
+source "$DIRECTORY/src/zsh_history.sh"
 
 # initialize completions with ZSH's compinit
 autoload -Uz compinit && compinit
