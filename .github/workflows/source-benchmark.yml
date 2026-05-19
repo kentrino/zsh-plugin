@@ -1,0 +1,45 @@
+name: Source benchmark
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  benchmark:
+    name: Benchmark sources on macOS
+    runs-on: macos-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Pre-install a few formulae that some src/*.sh files probe via
+      # `brew --prefix`. Anything missing just shows up as a no-op in the
+      # benchmark, so this list is intentionally minimal.
+      - name: Install supporting brew formulae
+        run: |
+          brew install coreutils libpq >/dev/null
+
+      - name: Run benchmark
+        run: |
+          chmod +x scripts/benchmark-sources.zsh
+          ./scripts/benchmark-sources.zsh "${{ runner.temp }}/bench-result.md"
+          echo "----- bench-result.md -----"
+          cat "${{ runner.temp }}/bench-result.md"
+
+      - name: Upload result as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-benchmark
+          path: ${{ runner.temp }}/bench-result.md
+
+      - name: Post sticky PR comment
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: source-benchmark
+          path: ${{ runner.temp }}/bench-result.md
