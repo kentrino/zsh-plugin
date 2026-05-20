@@ -1,0 +1,66 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        # actions/checkout v4.3.1
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Show shellcheck version
+        run: shellcheck --version
+
+      # We deliberately skip files that contain real zsh-only syntax
+      # (e.g. `setopt`, zsh glob patterns), since ShellCheck does not support
+      # the zsh dialect.
+      - name: Run ShellCheck
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find src -type f -name '*.sh' ! -name 'zsh_history.sh' | sort)
+          printf 'Checking %d file(s):\n' "${#files[@]}"
+          printf '  %s\n' "${files[@]}"
+          shellcheck "${files[@]}"
+
+  shfmt:
+    name: shfmt
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      # Renovate/Dependabot can bump these two together.
+      SHFMT_VERSION: v3.13.1
+      SHFMT_SHA256: fb096c5d1ac6beabbdbaa2874d025badb03ee07929f0c9ff67563ce8c75398b1
+    steps:
+      - name: Checkout
+        # actions/checkout v4.3.1
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Install shfmt
+        run: |
+          set -euo pipefail
+          url="https://github.com/mvdan/sh/releases/download/${SHFMT_VERSION}/shfmt_${SHFMT_VERSION}_linux_amd64"
+          curl -fsSL --retry 3 -o /tmp/shfmt "$url"
+          echo "${SHFMT_SHA256}  /tmp/shfmt" | sha256sum -c -
+          install -m 0755 /tmp/shfmt /usr/local/bin/shfmt
+          shfmt --version
+
+      # Formatting options (indent, final newline, etc.) come from
+      # the repo's .editorconfig so this stays a single source of truth.
+      - name: Check formatting (shfmt -d)
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find src -type f -name '*.sh' ! -name 'zsh_history.sh' | sort)
+          files+=(kentrino.zsh)
+          printf 'Checking %d file(s):\n' "${#files[@]}"
+          printf '  %s\n' "${files[@]}"
+          shfmt -d "${files[@]}"
