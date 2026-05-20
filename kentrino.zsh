@@ -5,9 +5,9 @@ export LANG=en_US.UTF-8
 DIRECTORY=$(dirname "$0":A)
 
 source "$DIRECTORY/src/homebrew.sh"
+source "$DIRECTORY/src/common/brew-prefix.sh"
 
 source "$DIRECTORY/src/alias.sh"
-source "$DIRECTORY/src/anyenv.sh"
 source "$DIRECTORY/src/asdf.sh"
 source "$DIRECTORY/src/bazel.sh"
 source "$DIRECTORY/src/bindkey.sh"
