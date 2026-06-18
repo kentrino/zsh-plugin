@@ -20,9 +20,6 @@ setopt SHARE_HISTORY
 #   but overrides SHARE_HISTORY and disables cross-tab sharing
 # setopt INC_APPEND_HISTORY_TIME
 
-# Setting for per-directory-history
-HISTORY_START_WITH_GLOBAL=true
-
 zshaddhistory() {
   emulate -L zsh
 
