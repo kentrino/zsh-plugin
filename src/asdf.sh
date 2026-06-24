@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # shellcheck disable=SC1091
-source "./common/brew-prefix.sh"
+source "$DIRECTORY/src/common/brew-prefix.sh"
 
 # https://asdf-vm.com/guide/getting-started.html
-asdf_source="$BREW_PREFIX/libexec/asdf.sh"
-
-if [ -s "$asdf_source" ]; then
-    #shellcheck disable=SC1090
-    . "$asdf_source"
-    # append completions to fpath
-    fpath=("${ASDF_DIR}/completions" "${fpath[@]}")
+if asdf_prefix="$(brew_prefix asdf)"; then
+    asdf_source="$asdf_prefix/libexec/asdf.sh"
+    if [ -s "$asdf_source" ]; then
+        #shellcheck disable=SC1090
+        . "$asdf_source"
+        fpath=("${ASDF_DIR}/completions" "${fpath[@]}")
+    fi
 fi
 
 if [ -s "$HOME/.asdf/asdf.sh" ]; then

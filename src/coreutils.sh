@@ -1,6 +1,9 @@
 #!/bin/bash
 
-if brew --prefix coreutils >/dev/null 2>&1; then
+# shellcheck disable=SC1091
+source "$DIRECTORY/src/common/brew-prefix.sh"
+
+if brew_prefix coreutils >/dev/null; then
     alias base64=gbase64
     alias basename=gbasename
     alias cat=gcat

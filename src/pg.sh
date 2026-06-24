@@ -1,6 +1,8 @@
 #!/bin/bash
 
-pg_path="$(brew --prefix libpq)/bin"
-if [ -d "$pg_path" ]; then
-    export PATH="$pg_path:$PATH"
+# shellcheck disable=SC1091
+source "$DIRECTORY/src/common/brew-prefix.sh"
+
+if libpq_prefix="$(brew_prefix libpq)"; then
+    export PATH="$libpq_prefix/bin:$PATH"
 fi

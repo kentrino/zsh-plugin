@@ -1,3 +1,6 @@
 #!/bin/bash
 
-[ -f "${HOME}/.ghcup/env" ] && source "${HOME}/.ghcup/env" # ghcup-env
+if [ -f "${HOME}/.ghcup/env" ]; then
+    # shellcheck disable=SC1091
+    source "${HOME}/.ghcup/env" # ghcup-env
+fi
