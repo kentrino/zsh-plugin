@@ -30,7 +30,14 @@ setopt SHARE_HISTORY
       history-incremental-search-backward history-incremental-search-forward; do
     original="_kentrino_history_original_${widget}"
     (( ${+widgets[$original]} )) && continue
-    zle -A "$widget" "$original"
+    if [[ $widgets[$widget] == builtin ]]; then
+      # Syntax-highlighting plugins expect builtin names to have a .name form.
+      # A builtin alias has no such form, so preserve it as a user widget.
+      eval "${original}() { zle .${widget} -- \"\$@\"; }"
+      zle -N "$original"
+    else
+      zle -A "$widget" "$original"
+    fi
     # Use an explicit widget name: other plugins may invoke us without zle -w.
     eval "_kentrino_history_${widget}() {
       [[ -r \$HISTFILE ]] && builtin fc -RI
