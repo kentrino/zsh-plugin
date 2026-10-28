@@ -1,6 +1,10 @@
 #!/bin/bash
 
 peco-history-selection() {
+    # Import commands from other tabs even while this prompt has been idle.
+    if [[ -r $HISTFILE ]]; then
+        builtin fc -RI
+    fi
     if $MAC_OS; then
         BUFFER=$(history -n 1 | tail -r | awk '!a[$0]++' | peco)
     else

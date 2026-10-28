@@ -13,12 +13,32 @@ setopt hist_save_no_dups
 # record timestamp
 setopt extended_history
 
-# share history across tabs/terminals (incompatible with INC_APPEND_HISTORY_TIME)
+# Clear conflicting options even when reloading an older running shell.
+unsetopt INC_APPEND_HISTORY INC_APPEND_HISTORY_TIME
+# share history across tabs/terminals
 setopt SHARE_HISTORY
 
-# INC_APPEND_HISTORY_TIME: writes history with duration after command finishes,
-#   but overrides SHARE_HISTORY and disables cross-tab sharing
-# setopt INC_APPEND_HISTORY_TIME
+# SHARE_HISTORY does not import while ZLE is waiting for input. Import before
+# history navigation and insertion (before autosuggestions fetch their result).
+# Keep existing widgets, and register only once so sourcing again is safe.
+() {
+  local widget original
+  for widget in self-insert self-insert-unmeta bracketed-paste \
+      up-line-or-history down-line-or-history up-history down-history \
+      history-beginning-search-backward history-beginning-search-forward \
+      history-search-backward history-search-forward \
+      history-incremental-search-backward history-incremental-search-forward; do
+    original="_kentrino_history_original_${widget}"
+    (( ${+widgets[$original]} )) && continue
+    zle -A "$widget" "$original"
+    # Use an explicit widget name: other plugins may invoke us without zle -w.
+    eval "_kentrino_history_${widget}() {
+      [[ -r \$HISTFILE ]] && builtin fc -RI
+      zle ${(q)original} -- \"\$@\"
+    }"
+    zle -N "$widget" "_kentrino_history_${widget}"
+  done
+}
 
 zshaddhistory() {
   emulate -L zsh
