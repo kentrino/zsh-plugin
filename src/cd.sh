@@ -15,7 +15,9 @@ ls-all() {
 cd() {
     # exit if cd fails
     builtin cd "$@" || return
-    ls-all
+    if [[ $- == *i* && -t 0 && -t 1 && ${TERM:-dumb} != dumb && -z ${CLAUDECODE:-}${CODEX_CI:-}${CODEX_SANDBOX:-}${CURSOR_AGENT:-}${CI:-} ]]; then
+        ls-all
+    fi
 }
 
 # Change directory by just typing directory name
