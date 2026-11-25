@@ -21,13 +21,10 @@ jobs:
       - name: Show shellcheck version
         run: shellcheck --version
 
-      # We deliberately skip files that contain real zsh-only syntax
-      # (e.g. `setopt`, zsh glob patterns), since ShellCheck does not support
-      # the zsh dialect.
       - name: Run ShellCheck
         run: |
           set -euo pipefail
-          mapfile -t files < <(find src -type f -name '*.sh' ! -name 'zsh_history.sh' | sort)
+          mapfile -t files < <(find src -type f -name '*.sh' | sort)
           printf 'Checking %d file(s):\n' "${#files[@]}"
           printf '  %s\n' "${files[@]}"
           shellcheck "${files[@]}"
@@ -59,7 +56,7 @@ jobs:
       - name: Check formatting (shfmt -d)
         run: |
           set -euo pipefail
-          mapfile -t files < <(find src -type f -name '*.sh' ! -name 'zsh_history.sh' | sort)
+          mapfile -t files < <(find src -type f -name '*.sh' | sort)
           files+=(kentrino.zsh)
           printf 'Checking %d file(s):\n' "${#files[@]}"
           printf '  %s\n' "${files[@]}"
