@@ -6,8 +6,10 @@ function get-computer-name() {
 
 function pwd() {
     local working_dir
-    working_dir=$(/bin/pwd)
-    echo "$working_dir" | pbcopy
+    working_dir=$(/bin/pwd "$@") || return
+    if [[ $- == *i* && -t 0 && -t 1 && ${TERM:-dumb} != dumb && -z ${CLAUDECODE:-}${CODEX_CI:-}${CODEX_SANDBOX:-}${CURSOR_AGENT:-}${CI:-} ]]; then
+        printf '%s' "$working_dir" | pbcopy
+    fi
     echo "$working_dir"
 }
 
